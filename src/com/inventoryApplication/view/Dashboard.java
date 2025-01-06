@@ -1,5 +1,8 @@
 package com.inventoryApplication.view;
 
+import com.inventoryApplication.controller.algorithms.BinarySearch;
+import com.inventoryApplication.controller.algorithms.MergeSort;
+import com.inventoryApplication.controller.algorithms.SelectionSort;
 import com.inventoryApplication.model.ContractModel;
 import com.inventoryApplication.model.HardwareModel;
 import com.inventoryApplication.util.ValidationUtil;
@@ -26,76 +29,76 @@ import javax.swing.table.DefaultTableModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
- * @author acer
- * 
- * 
+ * @author Suyog Bhattarai Lmuid:23048633
+ *
+ *
  */
-
 public class Dashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form Dashboard
      */
-    
     CardLayout cardLayout;
-       private List<ContractModel> ContractList;
-       private List<HardwareModel> HardwareList;
+    private List<ContractModel> ContractList;
+    private List<HardwareModel> HardwareList;
+
     public Dashboard() {
         initComponents();
         initializeLayout();
         setDefaultActiveButton();
         initializeData();
-       initializeTableListener();
-       
-    }
-    private void setDefaultActiveButton() {
-    activeButton = DashBoardButton;  // Make DashboardButton active by default
-    setBtnColor(DashBoardButton);   // Apply active button color
-    activeButton.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, new Color(237, 240, 242)));
-    loadScreen("DashBoardScreen");  // Load default screen
-}
-      private void initializeLayout() {
-        cardLayout = new java.awt.CardLayout();
-        
-        pnlCards.setLayout(cardLayout);
-         getContentPane().setLayout(cardLayout);
+        initializeTableListener();
 
-     
+    }
+
+    private void setDefaultActiveButton() {
+        activeButton = DashBoardButton;  // Make DashboardButton active by default
+        setBtnColor(DashBoardButton);   // Apply active button color
+        activeButton.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, new Color(237, 240, 242)));
+        loadScreen("DashBoardScreen");  // Load default screen
+    }
+
+    private void initializeLayout() {
+        cardLayout = new java.awt.CardLayout();
+
+        pnlCards.setLayout(cardLayout);
+        getContentPane().setLayout(cardLayout);
+
         pnlCards.add(DashBoardPanel, "DashBoardScreen");
         pnlCards.add(InstockPanel, "InStockScreen");
         pnlCards.add(ProductPanel, "ProductScreen");
         pnlCards.add(ContractPanel, "ContractScreen");
         pnlCards.add(OrdersPanel, "OrdersScreen");
         pnlCards.add(SuppliersPanel, "SuppliersScreen");
-        getContentPane().add(pnlMain,"MainScreen");
-        getContentPane().add(loginPage,"LoginScreen");
-        
+        getContentPane().add(pnlMain, "MainScreen");
+        getContentPane().add(loginPage, "LoginScreen");
 
-        cardLayout.show(getContentPane(), "LoginScreen");
-   
+        cardLayout.show(getContentPane(), "DashboardScreen");
+
     }
-       private void addContract(ContractModel contract) {
+
+    private void addContract(ContractModel contract) {
         ContractList.add(contract);
         DefaultTableModel model = (DefaultTableModel) tableContractDashboard.getModel();
         DefaultTableModel model2 = (DefaultTableModel) tableContractDashboard1.getModel();
-        model2.addRow(new Object[]{contract.getContractId(),contract.getContractTitle(),contract.getContractLocation(),contract.getContractStartDate(),contract.getContractExpectedEndDate(),contract.getContractStatus(),contract.getContractValue(),contract.getClientName(),contract.getScopeOfWork()});
+        model2.addRow(new Object[]{contract.getContractId(), contract.getContractTitle(), contract.getContractLocation(), contract.getContractStartDate(), contract.getContractExpectedEndDate(), contract.getContractStatus(), contract.getContractValue(), contract.getClientName(), contract.getScopeOfWork()});
 
-        model.addRow(new Object[]{contract.getContractId(),contract.getContractTitle(),contract.getContractLocation(),contract.getContractStartDate(),contract.getContractExpectedEndDate(),contract.getContractStatus(),contract.getContractValue(),contract.getClientName(),contract.getScopeOfWork()
+        model.addRow(new Object[]{contract.getContractId(), contract.getContractTitle(), contract.getContractLocation(), contract.getContractStartDate(), contract.getContractExpectedEndDate(), contract.getContractStatus(), contract.getContractValue(), contract.getClientName(), contract.getScopeOfWork()
         });
     }
-       
-            private void addStock(HardwareModel stock) {
+
+    private void addStock(HardwareModel stock) {
         HardwareList.add(stock);
         DefaultTableModel model = (DefaultTableModel) tableStockList.getModel();
         DefaultTableModel model2 = (DefaultTableModel) tableLatestStockDashboard.getModel();
-        model2.addRow(new Object[]{stock.getProductId(),stock.getProductName(),stock.getSupplierName(),stock.getDateOfEntry(),stock.getPrice(),stock.getQuantity(),stock.getUnit(),stock.getMeasurementDescription()});
+        model2.addRow(new Object[]{stock.getProductId(), stock.getProductName(), stock.getSupplierName(), stock.getDateOfEntry(), stock.getPrice(), stock.getQuantity(), stock.getUnit(), stock.getMeasurementDescription()});
 
-        model.addRow(new Object[]{stock.getProductId(),stock.getProductName(),stock.getSupplierName(),stock.getDateOfEntry(),stock.getPrice(),stock.getQuantity(),stock.getUnit(),stock.getMeasurementDescription()});
-       
+        model.addRow(new Object[]{stock.getProductId(), stock.getProductName(), stock.getSupplierName(), stock.getDateOfEntry(), stock.getPrice(), stock.getQuantity(), stock.getUnit(), stock.getMeasurementDescription()});
+
     }
+
     private void initializeData() {
         ContractList = new ArrayList();
 
@@ -116,7 +119,7 @@ public class Dashboard extends javax.swing.JFrame {
         addContract(new ContractModel(15, "Floor tiling", "Chitwan", LocalDate.parse("2024-12-17"), LocalDate.parse("2024-12-24"), "Pending", 22000, "Ramesh Magar", "Install ceramic tiles on all floors"));
 
         HardwareList = new ArrayList();
-        addStock(new HardwareModel(1, "Jagadamba steels", "Khanikhola enterprise", LocalDate.parse("2024-12-03"),200000,50,"meter","Thickness:20 mm length :2 mter per pice"));
+        addStock(new HardwareModel(1, "Jagadamba steels", "Khanikhola enterprise", LocalDate.parse("2024-12-03"), 200000, 50, "meter", "Thickness:20 mm length :2 mter per pice"));
         addStock(new HardwareModel(2, "Shree Cement", "Bhairahawa Distributors", LocalDate.parse("2024-11-25"), 150000, 100, "bag", "Grade: OPC 43, Weight: 50 kg per bag"));
         addStock(new HardwareModel(3, "Nepal Paints", "Colors Nepal Pvt. Ltd.", LocalDate.parse("2024-10-15"), 75000, 30, "liter", "Finish: Matte, Color: White"));
         addStock(new HardwareModel(4, "Jagadamba Rods", "Biratnagar Steel Suppliers", LocalDate.parse("2024-09-30"), 300000, 20, "ton", "Diameter: 12 mm, Length: 12 meters per rod"));
@@ -133,6 +136,7 @@ public class Dashboard extends javax.swing.JFrame {
         addStock(new HardwareModel(15, "Electrical Wire Coils", "Power Line Distributors", LocalDate.parse("2024-11-28"), 60000, 150, "coil", "Gauge: 2.5 mm, Length: 90 meters per coil"));
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,8 +161,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlMain = new javax.swing.JPanel();
         NavBar = new javax.swing.JPanel();
         MainLogo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblSearchBtn = new javax.swing.JLabel();
+        searchBar = new javax.swing.JTextField();
         addProductBtn = new RoundedPanel(50,new Color(194,72,34));
         addProductText = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -170,6 +174,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         addStockBtn1 = new RoundedPanel(50,new Color(180,20,9));
         addProductText8 = new javax.swing.JLabel();
+        dropDownSearch = new javax.swing.JComboBox<>();
         jSplitPane1 = new javax.swing.JSplitPane();
         SideMenu = new javax.swing.JPanel();
         DashBoardButton = new javax.swing.JPanel();
@@ -195,7 +200,6 @@ public class Dashboard extends javax.swing.JFrame {
         pnlInStockMain = new javax.swing.JPanel();
         addStockPanel = new RoundedPanel(40,Color.white);
         addContractText4 = new javax.swing.JLabel();
-        jSeparator12 = new javax.swing.JSeparator();
         txtContractTitle4 = new javax.swing.JTextField();
         txtContractId4 = new javax.swing.JTextField();
         txtContractLocation4 = new javax.swing.JTextField();
@@ -208,6 +212,7 @@ public class Dashboard extends javax.swing.JFrame {
         addContractBtn5 = new RoundedPanel(50,new Color(44,44,44));
         addProductText7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jSeparator14 = new javax.swing.JSeparator();
         InstockListDisplay = new RoundedPanel(40,Color.WHITE);
         StockListText = new javax.swing.JLabel();
         jSeparator13 = new javax.swing.JSeparator();
@@ -287,7 +292,6 @@ public class Dashboard extends javax.swing.JFrame {
         pnlDataDisplayParent1 = new javax.swing.JPanel();
         addContractsPanel = new RoundedPanel(40,Color.white);
         addContractText = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
         txtContractTitle = new javax.swing.JTextField();
         txtContractId = new javax.swing.JTextField();
         txtContractLocation = new javax.swing.JTextField();
@@ -308,11 +312,14 @@ public class Dashboard extends javax.swing.JFrame {
         ClearDataBtn = new RoundedPanel(50,new Color(0,0,0
         ));
         clearDataTxt = new javax.swing.JLabel();
+        jSeparator16 = new javax.swing.JSeparator();
         PendingContractsDisplay2 = new RoundedPanel(40,Color.WHITE);
         totalPurchaseText6 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableContractDashboard1 = new javax.swing.JTable();
+        sortDropDown1 = new javax.swing.JComboBox<>();
+        jLabel18 = new javax.swing.JLabel();
+        jSeparator17 = new javax.swing.JSeparator();
         DashBoardPanel = new javax.swing.JScrollPane();
         DashBoardScreen = new javax.swing.JPanel();
         pnlDisplayParent = new javax.swing.JPanel();
@@ -337,6 +344,8 @@ public class Dashboard extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableContractDashboard = new javax.swing.JTable();
+        sortDropDown = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         NewOrdersDisplayPanel = new RoundedPanel(40,Color.WHITE);
         totalPurchaseText1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -350,10 +359,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(44, 44, 44));
-        setMaximumSize(new java.awt.Dimension(1440, 1024));
         setMinimumSize(new java.awt.Dimension(1440, 1024));
         setName("Dashboard"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1440, 1024));
 
         loginPage.setBackground(new java.awt.Color(239, 239, 239));
 
@@ -429,9 +436,6 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(loginCardLayout.createSequentialGroup()
                 .addGroup(loginCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginCardLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginCardLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(loginCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnlLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,7 +443,8 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(loginTitleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(loginCardLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(MainLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -448,13 +453,13 @@ public class Dashboard extends javax.swing.JFrame {
         loginCardLayout.setVerticalGroup(
             loginCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginCardLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(MainLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginTitleTxt)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel17)
                 .addGap(4, 4, 4)
                 .addComponent(txtFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,7 +469,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(txtFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(pnlLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout loginPageLayout = new javax.swing.GroupLayout(loginPage);
@@ -476,7 +481,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(loginCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(bannerImg)
-                .addContainerGap(497, Short.MAX_VALUE))
+                .addContainerGap(524, Short.MAX_VALUE))
         );
         loginPageLayout.setVerticalGroup(
             loginPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,7 +490,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(0, 1145, Short.MAX_VALUE))
             .addGroup(loginPageLayout.createSequentialGroup()
                 .addGap(159, 159, 159)
-                .addComponent(loginCard, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -496,15 +501,30 @@ public class Dashboard extends javax.swing.JFrame {
         MainLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventoryApplication/resources/MainLogo.png"))); // NOI18N
         MainLogo.setText("jLabel1");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventoryApplication/resources/searchIcon.png"))); // NOI18N
+        lblSearchBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventoryApplication/resources/searchIcon.png"))); // NOI18N
+        lblSearchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSearchBtnMouseClicked(evt);
+            }
+        });
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(243, 243, 243));
-        jTextField1.setColumns(10);
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        searchBar.setEditable(true);
+        searchBar.setBackground(new java.awt.Color(252, 252, 252));
+        searchBar.setColumns(10);
+        searchBar.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
+        searchBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        searchBar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchBarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchBarFocusLost(evt);
+            }
+        });
+        searchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchBarActionPerformed(evt);
             }
         });
 
@@ -653,6 +673,20 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(addProductText8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
 
+        dropDownSearch.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
+        dropDownSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Models", "Contract", "Stock", "Order", "Product","supplier" }));
+        dropDownSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 224, 224)));
+        dropDownSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dropDownSearchMouseClicked(evt);
+            }
+        });
+        dropDownSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropDownSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout NavBarLayout = new javax.swing.GroupLayout(NavBar);
         NavBar.setLayout(NavBarLayout);
         NavBarLayout.setHorizontalGroup(
@@ -660,11 +694,13 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(NavBarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(MainLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(dropDownSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addComponent(lblSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(addProductBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(addContractBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -677,25 +713,27 @@ public class Dashboard extends javax.swing.JFrame {
         NavBarLayout.setVerticalGroup(
             NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(MainLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-            .addGroup(NavBarLayout.createSequentialGroup()
                 .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addStockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(NavBarLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(addStockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addContractBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(addProductBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(NavBarLayout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                            .addContainerGap(31, Short.MAX_VALUE)
+                            .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addStockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addContractBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addProductBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addStockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblSearchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dropDownSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
+                .addGap(34, 34, 34))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NavBarLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MainLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         pnlMain.add(NavBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 110));
@@ -1022,8 +1060,6 @@ public class Dashboard extends javax.swing.JFrame {
         addContractText4.setForeground(new java.awt.Color(194, 72, 34));
         addContractText4.setText("Add Stock:");
 
-        jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
-
         txtContractTitle4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Title:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractTitle4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1106,14 +1142,19 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         jLabel11.setText("Scope Of Work:");
 
+        jSeparator14.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator14.setForeground(new java.awt.Color(51, 51, 51));
+
         javax.swing.GroupLayout addStockPanelLayout = new javax.swing.GroupLayout(addStockPanel);
         addStockPanel.setLayout(addStockPanelLayout);
         addStockPanelLayout.setHorizontalGroup(
             addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addStockPanelLayout.createSequentialGroup()
+            .addGroup(addStockPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator12)
+                .addGroup(addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addStockPanelLayout.createSequentialGroup()
+                        .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(addStockPanelLayout.createSequentialGroup()
                         .addGroup(addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(addStockPanelLayout.createSequentialGroup()
@@ -1132,23 +1173,23 @@ public class Dashboard extends javax.swing.JFrame {
                                     .addGroup(addStockPanelLayout.createSequentialGroup()
                                         .addGap(75, 75, 75)
                                         .addComponent(txtContractTitle4, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                         .addGroup(addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtClientName4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addContractBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(36, 36, 36))
+                                .addComponent(addContractBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36))))
         );
         addStockPanelLayout.setVerticalGroup(
             addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addStockPanelLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(addContractText4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addGroup(addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(addStockPanelLayout.createSequentialGroup()
                         .addGroup(addStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1186,11 +1227,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator13.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator13.setForeground(new java.awt.Color(51, 51, 51));
-        InstockListDisplay.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1190, 19));
+        InstockListDisplay.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1190, 10));
 
         jScrollPane11.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane11.setBorder(null);
+        jScrollPane11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        jScrollPane11.setViewportBorder(null);
 
+        tableStockList.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableStockList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1214,6 +1257,13 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableStockList.setGridColor(new java.awt.Color(215, 215, 215));
+        tableStockList.setRowHeight(25);
+        tableStockList.setRowMargin(5);
+        tableStockList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableStockList.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableStockList.setShowGrid(false);
+        tableStockList.setShowHorizontalLines(true);
         jScrollPane11.setViewportView(tableStockList);
         if (tableStockList.getColumnModel().getColumnCount() > 0) {
             tableStockList.getColumnModel().getColumn(0).setResizable(false);
@@ -1248,7 +1298,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(InstockListDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(addStockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1263, Short.MAX_VALUE))
+                .addContainerGap(1749, Short.MAX_VALUE))
         );
 
         InstockPanel.setViewportView(pnlInStockMain);
@@ -1442,11 +1492,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator11.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator11.setForeground(new java.awt.Color(51, 51, 51));
-        ProductListDisplay.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1200, 19));
+        ProductListDisplay.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1200, 10));
 
         jScrollPane9.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane9.setBorder(null);
+        jScrollPane9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        jScrollPane9.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
 
+        tableProductList.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableProductList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1463,6 +1515,12 @@ public class Dashboard extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableProductList.setGridColor(new java.awt.Color(215, 215, 215));
+        tableProductList.setRowHeight(25);
+        tableProductList.setRowMargin(5);
+        tableProductList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableProductList.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableProductList.setShowHorizontalLines(true);
         jScrollPane9.setViewportView(tableProductList);
 
         ProductListDisplay.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1200, 180));
@@ -1489,7 +1547,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(ProductListDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(addProductPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1232, Short.MAX_VALUE))
+                .addContainerGap(1749, Short.MAX_VALUE))
             .addGroup(pnlProductMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlProductMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1688,11 +1746,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator9.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator9.setForeground(new java.awt.Color(51, 51, 51));
-        ordersListDisplay.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1180, 19));
+        ordersListDisplay.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1180, 10));
 
         jScrollPane7.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane7.setBorder(null);
+        jScrollPane7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
+        tableOrdersList.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableOrdersList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1709,6 +1768,10 @@ public class Dashboard extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableOrdersList.setGridColor(new java.awt.Color(215, 215, 215));
+        tableOrdersList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableOrdersList.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableOrdersList.setShowHorizontalLines(true);
         jScrollPane7.setViewportView(tableOrdersList);
 
         ordersListDisplay.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1210, 180));
@@ -1722,7 +1785,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(pnlOrdersMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ordersListDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 1249, Short.MAX_VALUE)
                     .addComponent(addOrdersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(556, Short.MAX_VALUE))
+                .addContainerGap(592, Short.MAX_VALUE))
             .addGroup(pnlOrdersMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlOrdersMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1736,7 +1799,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(ordersListDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(addOrdersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1237, Short.MAX_VALUE))
+                .addContainerGap(1749, Short.MAX_VALUE))
             .addGroup(pnlOrdersMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlOrdersMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1935,11 +1998,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator7.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator7.setForeground(new java.awt.Color(51, 51, 51));
-        SupplierListDisplay.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1200, 19));
+        SupplierListDisplay.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1200, 10));
 
         jScrollPane5.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane5.setBorder(null);
+        jScrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
+        tableSupplierList.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableSupplierList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1956,6 +2020,10 @@ public class Dashboard extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableSupplierList.setGridColor(new java.awt.Color(215, 215, 215));
+        tableSupplierList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableSupplierList.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableSupplierList.setShowHorizontalLines(true);
         jScrollPane5.setViewportView(tableSupplierList);
 
         SupplierListDisplay.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1200, 180));
@@ -1969,7 +2037,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(pnlSupplierMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(SupplierListDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 1244, Short.MAX_VALUE)
                     .addComponent(addSupplierPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(551, Short.MAX_VALUE))
+                .addContainerGap(597, Short.MAX_VALUE))
             .addGroup(pnlSupplierMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlSupplierMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1983,7 +2051,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(SupplierListDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(addSupplierPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1495, Short.MAX_VALUE))
+                .addContainerGap(1749, Short.MAX_VALUE))
             .addGroup(pnlSupplierMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlSupplierMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -2017,8 +2085,6 @@ public class Dashboard extends javax.swing.JFrame {
         addContractText.setFont(new java.awt.Font("Poppins Light", 1, 24)); // NOI18N
         addContractText.setForeground(new java.awt.Color(194, 72, 34));
         addContractText.setText("Manage Contracts:");
-
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
 
         txtContractTitle.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Title:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractTitle.addActionListener(new java.awt.event.ActionListener() {
@@ -2070,6 +2136,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtScopeOfWork.setColumns(20);
+        txtScopeOfWork.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         txtScopeOfWork.setRows(5);
         txtScopeOfWork.setBorder(null);
         jScrollPane1.setViewportView(txtScopeOfWork);
@@ -2193,90 +2260,89 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(clearDataTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
 
+        jSeparator16.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator16.setForeground(new java.awt.Color(51, 51, 51));
+
         javax.swing.GroupLayout addContractsPanelLayout = new javax.swing.GroupLayout(addContractsPanel);
         addContractsPanel.setLayout(addContractsPanelLayout);
         addContractsPanelLayout.setHorizontalGroup(
             addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addContractsPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addContractsPanelLayout.createSequentialGroup()
-                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addContractsPanelLayout.createSequentialGroup()
+                        .addComponent(addContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(updateContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(deleteContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(ClearDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(addContractsPanelLayout.createSequentialGroup()
+                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 1168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(addContractsPanelLayout.createSequentialGroup()
                                 .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtContractId, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                                    .addComponent(txtContractLocation)
-                                    .addComponent(addContractText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtContractStartDate))
-                                .addGap(37, 37, 37)
-                                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(addContractsPanelLayout.createSequentialGroup()
                                         .addComponent(txtContractStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtContractExpectedEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(addContractsPanelLayout.createSequentialGroup()
+                                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(addContractText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtContractId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(116, 116, 116)
                                         .addComponent(txtContractTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtContractExpectedEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
+                                    .addGroup(addContractsPanelLayout.createSequentialGroup()
+                                        .addComponent(txtContractStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtContractLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtContractValue, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(addContractsPanelLayout.createSequentialGroup()
-                                .addComponent(addContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(updateContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(deleteContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(ClearDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(36, 36, 36))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtContractValue, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         addContractsPanelLayout.setVerticalGroup(
             addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addContractsPanelLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(addContractText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtContractTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                        .addComponent(txtContractId, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(addContractsPanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addContractsPanelLayout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(txtContractId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addContractsPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(addContractsPanelLayout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(txtContractLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtContractStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(addContractsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88))))
+                        .addGap(18, 18, 18)
+                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtContractLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                            .addComponent(txtContractStartDate)))
                     .addGroup(addContractsPanelLayout.createSequentialGroup()
-                        .addComponent(txtContractTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(txtContractStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtContractExpectedEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContractValue, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(41, 41, 41)
+                .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtContractStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContractExpectedEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContractValue, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addContractsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(updateContractBtnContractPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deleteContractBtnContractPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addContractBtnContractPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ClearDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                .addGap(144, 144, 144))
         );
 
         PendingContractsDisplay2.setBackground(null);
@@ -2288,13 +2354,14 @@ public class Dashboard extends javax.swing.JFrame {
         totalPurchaseText6.setText("Contract List:");
         PendingContractsDisplay2.add(totalPurchaseText6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 271, -1));
 
-        jSeparator5.setBackground(new java.awt.Color(51, 51, 51));
-        jSeparator5.setForeground(new java.awt.Color(51, 51, 51));
-        PendingContractsDisplay2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1210, 19));
-
         jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane4.setBorder(null);
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        jScrollPane4.setViewportBorder(null);
+        jScrollPane4.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
+        jScrollPane4.setViewport(null);
 
+        tableContractDashboard1.setBorder(null);
+        tableContractDashboard1.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableContractDashboard1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2318,10 +2385,20 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableContractDashboard1.setAlignmentY(2.0F);
+        tableContractDashboard1.setFocusCycleRoot(true);
+        tableContractDashboard1.setGridColor(new java.awt.Color(214, 214, 214));
+        tableContractDashboard1.setRowHeight(25);
+        tableContractDashboard1.setRowMargin(5);
+        tableContractDashboard1.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableContractDashboard1.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableContractDashboard1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableContractDashboard1.setShowGrid(false);
+        tableContractDashboard1.setShowHorizontalLines(true);
         jScrollPane4.setViewportView(tableContractDashboard1);
         if (tableContractDashboard1.getColumnModel().getColumnCount() > 0) {
             tableContractDashboard1.getColumnModel().getColumn(0).setResizable(false);
-            tableContractDashboard1.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tableContractDashboard1.getColumnModel().getColumn(0).setPreferredWidth(70);
             tableContractDashboard1.getColumnModel().getColumn(1).setResizable(false);
             tableContractDashboard1.getColumnModel().getColumn(1).setPreferredWidth(150);
             tableContractDashboard1.getColumnModel().getColumn(2).setResizable(false);
@@ -2333,10 +2410,33 @@ public class Dashboard extends javax.swing.JFrame {
             tableContractDashboard1.getColumnModel().getColumn(7).setResizable(false);
             tableContractDashboard1.getColumnModel().getColumn(7).setPreferredWidth(100);
             tableContractDashboard1.getColumnModel().getColumn(8).setResizable(false);
-            tableContractDashboard1.getColumnModel().getColumn(8).setPreferredWidth(250);
+            tableContractDashboard1.getColumnModel().getColumn(8).setPreferredWidth(270);
         }
 
-        PendingContractsDisplay2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1210, 180));
+        PendingContractsDisplay2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1190, 180));
+
+        sortDropDown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item", "Latest Data", "Price:High To Low", "Price:Low To High", "Name" }));
+        sortDropDown1.setBorder(null);
+        sortDropDown1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sortDropDown1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sortDropDown1MouseClicked(evt);
+            }
+        });
+        sortDropDown1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortDropDown1ActionPerformed(evt);
+            }
+        });
+        PendingContractsDisplay2.add(sortDropDown1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 150, 30));
+
+        jLabel18.setFont(new java.awt.Font("Poppins Light", 1, 18)); // NOI18N
+        jLabel18.setText("Sort By:");
+        PendingContractsDisplay2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 10, -1, 50));
+
+        jSeparator17.setBackground(new java.awt.Color(51, 51, 51));
+        jSeparator17.setForeground(new java.awt.Color(51, 51, 51));
+        PendingContractsDisplay2.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1190, 10));
 
         javax.swing.GroupLayout pnlContractMainLayout = new javax.swing.GroupLayout(pnlContractMain);
         pnlContractMain.setLayout(pnlContractMainLayout);
@@ -2345,9 +2445,9 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pnlContractMainLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(pnlContractMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PendingContractsDisplay2, javax.swing.GroupLayout.DEFAULT_SIZE, 1258, Short.MAX_VALUE)
+                    .addComponent(PendingContractsDisplay2, javax.swing.GroupLayout.DEFAULT_SIZE, 1236, Short.MAX_VALUE)
                     .addComponent(addContractsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addContainerGap(605, Short.MAX_VALUE))
             .addGroup(pnlContractMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlContractMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -2360,8 +2460,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(PendingContractsDisplay2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(addContractsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1332, Short.MAX_VALUE))
+                .addComponent(addContractsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1647, Short.MAX_VALUE))
             .addGroup(pnlContractMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlContractMainLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -2549,11 +2649,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator2.setForeground(new java.awt.Color(51, 51, 51));
-        PendingContractsDisplay1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1120, 19));
+        PendingContractsDisplay1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 67, 1160, -1));
 
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane3.setBorder(null);
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
+        tableContractDashboard.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableContractDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2562,21 +2663,22 @@ public class Dashboard extends javax.swing.JFrame {
                 "Id", "Contract Title", "Contract Location", "Contract Start Date", "Contract End Date", "Contract Status", "Contract value ", "Client Name", "Scope Of Work"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tableContractDashboard.setGridColor(new java.awt.Color(214, 214, 214));
+        tableContractDashboard.setRowHeight(25);
+        tableContractDashboard.setRowMargin(5);
+        tableContractDashboard.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableContractDashboard.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableContractDashboard.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableContractDashboard.setShowGrid(false);
+        tableContractDashboard.setShowHorizontalLines(true);
         jScrollPane3.setViewportView(tableContractDashboard);
         if (tableContractDashboard.getColumnModel().getColumnCount() > 0) {
             tableContractDashboard.getColumnModel().getColumn(0).setResizable(false);
@@ -2597,7 +2699,26 @@ public class Dashboard extends javax.swing.JFrame {
             tableContractDashboard.getColumnModel().getColumn(8).setPreferredWidth(250);
         }
 
-        PendingContractsDisplay1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1120, 180));
+        PendingContractsDisplay1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1160, 200));
+
+        sortDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item", "Latest Data", "Price:High To Low", "Price:Low To High", "Name" }));
+        sortDropDown.setBorder(null);
+        sortDropDown.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sortDropDown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sortDropDownMouseClicked(evt);
+            }
+        });
+        sortDropDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortDropDownActionPerformed(evt);
+            }
+        });
+        PendingContractsDisplay1.add(sortDropDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 150, 30));
+
+        jLabel1.setFont(new java.awt.Font("Poppins Light", 1, 18)); // NOI18N
+        jLabel1.setText("Sort By:");
+        PendingContractsDisplay1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
 
         pnlDataDisplayParent.add(PendingContractsDisplay1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1200, 290));
 
@@ -2612,10 +2733,10 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
-        NewOrdersDisplayPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1120, 19));
+        NewOrdersDisplayPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 1150, 10));
 
         jScrollPane12.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane12.setBorder(null);
+        jScrollPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
         tableNewOrdersDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2633,6 +2754,13 @@ public class Dashboard extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableNewOrdersDashboard.setGridColor(new java.awt.Color(214, 214, 214));
+        tableNewOrdersDashboard.setRowHeight(25);
+        tableNewOrdersDashboard.setRowMargin(5);
+        tableNewOrdersDashboard.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableNewOrdersDashboard.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableNewOrdersDashboard.setShowGrid(false);
+        tableNewOrdersDashboard.setShowHorizontalLines(true);
         jScrollPane12.setViewportView(tableNewOrdersDashboard);
         if (tableNewOrdersDashboard.getColumnModel().getColumnCount() > 0) {
             tableNewOrdersDashboard.getColumnModel().getColumn(0).setResizable(false);
@@ -2647,7 +2775,7 @@ public class Dashboard extends javax.swing.JFrame {
             tableNewOrdersDashboard.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        NewOrdersDisplayPanel.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1120, 180));
+        NewOrdersDisplayPanel.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1160, 190));
 
         LatestStockDisplayPanel1.setBackground(null);
         LatestStockDisplayPanel1.setBorder(null);
@@ -2660,11 +2788,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator4.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator4.setForeground(new java.awt.Color(51, 51, 51));
-        LatestStockDisplayPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1120, 19));
+        LatestStockDisplayPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1160, 10));
 
         jScrollPane13.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane13.setBorder(null);
+        jScrollPane13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
+        tableLatestStockDashboard.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
         tableLatestStockDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2688,6 +2817,13 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableLatestStockDashboard.setGridColor(new java.awt.Color(214, 214, 214));
+        tableLatestStockDashboard.setRowHeight(25);
+        tableLatestStockDashboard.setRowMargin(5);
+        tableLatestStockDashboard.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableLatestStockDashboard.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableLatestStockDashboard.setShowGrid(false);
+        tableLatestStockDashboard.setShowHorizontalLines(true);
         jScrollPane13.setViewportView(tableLatestStockDashboard);
         if (tableLatestStockDashboard.getColumnModel().getColumnCount() > 0) {
             tableLatestStockDashboard.getColumnModel().getColumn(0).setResizable(false);
@@ -2704,7 +2840,7 @@ public class Dashboard extends javax.swing.JFrame {
             tableLatestStockDashboard.getColumnModel().getColumn(7).setPreferredWidth(250);
         }
 
-        LatestStockDisplayPanel1.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1120, 180));
+        LatestStockDisplayPanel1.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1160, 200));
 
         javax.swing.GroupLayout DashBoardScreenLayout = new javax.swing.GroupLayout(DashBoardScreen);
         DashBoardScreen.setLayout(DashBoardScreenLayout);
@@ -2719,7 +2855,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGroup(DashBoardScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LatestStockDisplayPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NewOrdersDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(539, Short.MAX_VALUE))
+                .addContainerGap(549, Short.MAX_VALUE))
         );
         DashBoardScreenLayout.setVerticalGroup(
             DashBoardScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2729,10 +2865,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(pnlDataDisplayParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(LatestStockDisplayPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(LatestStockDisplayPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(NewOrdersDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1230, 1230, 1230))
+                .addGap(1240, 1240, 1240))
         );
 
         DashBoardPanel.setViewportView(DashBoardScreen);
@@ -2747,7 +2883,7 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1964, Short.MAX_VALUE)
+            .addGap(0, 1987, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -2763,7 +2899,7 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 2068, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(loginPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
@@ -2779,53 +2915,54 @@ public class Dashboard extends javax.swing.JFrame {
   private void loadScreen(String screenName) {
         cardLayout.show(pnlCards, screenName);
     }
-   private void loadScreenPage(String screenName) {
+
+    private void loadScreenPage(String screenName) {
         cardLayout.show(getContentPane(), screenName);
     }
-  private void setBtnColor(JPanel btn) {
-         btn.setBackground(new Color(194, 72, 34)); 
+
+    private void setBtnColor(JPanel btn) {
+        btn.setBackground(new Color(194, 72, 34));
     }
-     private void setInitialBtnColor(JPanel btn) {
-         btn.setBackground( new Color(37, 38, 58)); 
+
+    private void setInitialBtnColor(JPanel btn) {
+        btn.setBackground(new Color(37, 38, 58));
     }
-     
-     private JPanel activeButton = null;
-    
-     private void setActiveButton(JPanel btn) {
-   
-       
-         
+
+    private JPanel activeButton = null;
+
+    private void setActiveButton(JPanel btn) {
+
         if (activeButton != null && activeButton != btn) {
             setInitialBtnColor(activeButton);
             activeButton.setBorder(BorderFactory.createEmptyBorder());
         }
         activeButton = btn;
         setBtnColor(activeButton);
-         activeButton.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, new Color(237, 240, 242)));
-}
-   
+        activeButton.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0, new Color(237, 240, 242)));
+    }
+
     private void SupplierButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplierButtonMouseClicked
         loadScreen("SuppliersScreen");
         setActiveButton(SupplierButton);
-        
+
     }//GEN-LAST:event_SupplierButtonMouseClicked
 
     private void OrderButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderButtonMouseClicked
         loadScreen("OrdersScreen");
         setActiveButton(OrderButton);
-        
+
     }//GEN-LAST:event_OrderButtonMouseClicked
 
     private void ContractButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContractButtonMouseClicked
         loadScreen("ContractScreen");
         setActiveButton(ContractButton);
-        
+
     }//GEN-LAST:event_ContractButtonMouseClicked
 
     private void ProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductButtonMouseClicked
         loadScreen("ProductScreen");
-         setActiveButton(ProductButton);
-        
+        setActiveButton(ProductButton);
+
     }//GEN-LAST:event_ProductButtonMouseClicked
 
     private void InStockButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InStockButtonMousePressed
@@ -2835,94 +2972,94 @@ public class Dashboard extends javax.swing.JFrame {
     private void InStockButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InStockButtonMouseClicked
         loadScreen("InStockScreen");
         setActiveButton(InStockButton);
-        
+
     }//GEN-LAST:event_InStockButtonMouseClicked
 
     private void DashBoardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashBoardButtonMouseClicked
         loadScreen("DashBoardScreen");
         setActiveButton(DashBoardButton);
-           
+
     }//GEN-LAST:event_DashBoardButtonMouseClicked
 
     private void DashBoardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashBoardButtonMouseEntered
         // TODO add your handling code here:
-          if (activeButton != DashBoardButton) {
-        setBtnColor(DashBoardButton);
-    }
-        
+        if (activeButton != DashBoardButton) {
+            setBtnColor(DashBoardButton);
+        }
+
     }//GEN-LAST:event_DashBoardButtonMouseEntered
 
     private void InStockButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InStockButtonMouseEntered
-            if (activeButton != InStockButton) {
-        setBtnColor(InStockButton);
-    }
+        if (activeButton != InStockButton) {
+            setBtnColor(InStockButton);
+        }
     }//GEN-LAST:event_InStockButtonMouseEntered
 
     private void ProductButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductButtonMouseEntered
-    if (activeButton != ProductButton) {
-        setBtnColor(ProductButton);
-    }
+        if (activeButton != ProductButton) {
+            setBtnColor(ProductButton);
+        }
     }//GEN-LAST:event_ProductButtonMouseEntered
 
     private void ContractButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContractButtonMouseEntered
         if (activeButton != ContractButton) {
-        setBtnColor(ContractButton);
-    }
+            setBtnColor(ContractButton);
+        }
     }//GEN-LAST:event_ContractButtonMouseEntered
 
     private void OrderButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderButtonMouseEntered
-            if (activeButton != OrderButton) {
-        setBtnColor(OrderButton);
-    }
+        if (activeButton != OrderButton) {
+            setBtnColor(OrderButton);
+        }
     }//GEN-LAST:event_OrderButtonMouseEntered
 
     private void SupplierButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplierButtonMouseEntered
-              if (activeButton != SupplierButton) {
-        setBtnColor(SupplierButton);
-    }
+        if (activeButton != SupplierButton) {
+            setBtnColor(SupplierButton);
+        }
     }//GEN-LAST:event_SupplierButtonMouseEntered
 
     private void DashBoardButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashBoardButtonMouseExited
-       if (activeButton != DashBoardButton) {
-        setInitialBtnColor(DashBoardButton);
-    }
+        if (activeButton != DashBoardButton) {
+            setInitialBtnColor(DashBoardButton);
+        }
     }//GEN-LAST:event_DashBoardButtonMouseExited
 
     private void InStockButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InStockButtonMouseExited
-      if (activeButton != InStockButton) {
-        setInitialBtnColor(InStockButton);
-    }
+        if (activeButton != InStockButton) {
+            setInitialBtnColor(InStockButton);
+        }
     }//GEN-LAST:event_InStockButtonMouseExited
 
     private void ProductButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductButtonMouseExited
-      if (activeButton != ProductButton) {
-        setInitialBtnColor(ProductButton);
-    }
+        if (activeButton != ProductButton) {
+            setInitialBtnColor(ProductButton);
+        }
     }//GEN-LAST:event_ProductButtonMouseExited
 
     private void ContractButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContractButtonMouseExited
-          if (activeButton != ContractButton) {
-        setInitialBtnColor(ContractButton);
-    }
+        if (activeButton != ContractButton) {
+            setInitialBtnColor(ContractButton);
+        }
     }//GEN-LAST:event_ContractButtonMouseExited
 
     private void OrderButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderButtonMouseExited
-           if (activeButton !=OrderButton) {
-        setInitialBtnColor(OrderButton);
-    }
+        if (activeButton != OrderButton) {
+            setInitialBtnColor(OrderButton);
+        }
     }//GEN-LAST:event_OrderButtonMouseExited
 
     private void SupplierButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplierButtonMouseExited
-            if (activeButton != SupplierButton) {
-        setInitialBtnColor(SupplierButton);
-    }
-          
-          
+        if (activeButton != SupplierButton) {
+            setInitialBtnColor(SupplierButton);
+        }
+
+
     }//GEN-LAST:event_SupplierButtonMouseExited
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchBarActionPerformed
 
     private void txtContractTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContractTitleActionPerformed
         // TODO add your handling code here:
@@ -2959,29 +3096,29 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void addContractBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addContractBtnMouseEntered
         // TODO add your handling code here:
-     
-      addContractBtn.setBackground( new Color(44,44,44));
+
+        addContractBtn.setBackground(new Color(44, 44, 44));
     }//GEN-LAST:event_addContractBtnMouseEntered
 
     private void addContractBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addContractBtnMouseExited
         // TODO add your handling code here:
-      addContractBtn.setBackground( Color.WHITE);
+        addContractBtn.setBackground(Color.WHITE);
     }//GEN-LAST:event_addContractBtnMouseExited
 
     private void addProductBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnMouseEntered
         // TODO add your handling code here:
-        addProductBtn.setBackground( new Color(194,72,34));
+        addProductBtn.setBackground(new Color(194, 72, 34));
     }//GEN-LAST:event_addProductBtnMouseEntered
 
     private void addProductBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnMouseClicked
         // TODO add your handling code here:
-          loadScreen("ProductScreen");
+        loadScreen("ProductScreen");
         setActiveButton(ProductButton);
     }//GEN-LAST:event_addProductBtnMouseClicked
 
     private void addProductBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnMouseExited
         // TODO add your handling code here:
-        addProductBtn.setBackground( Color.WHITE);
+        addProductBtn.setBackground(Color.WHITE);
     }//GEN-LAST:event_addProductBtnMouseExited
 
     private void addStockBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStockBtnMouseClicked
@@ -2992,176 +3129,169 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void addStockBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStockBtnMouseEntered
         // TODO add your handling code here:
-        addStockBtn.setBackground( new Color(56,183,53));
+        addStockBtn.setBackground(new Color(56, 183, 53));
     }//GEN-LAST:event_addStockBtnMouseEntered
 
     private void addStockBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStockBtnMouseExited
-       addStockBtn.setBackground( Color.WHITE);
+        addStockBtn.setBackground(Color.WHITE);
     }//GEN-LAST:event_addStockBtnMouseExited
-private boolean isContractIdDuplicate(int contractId) {
-    // Assuming `contractList` is a List<ContractModel> storing all contracts
-    for (ContractModel contract : ContractList) {
-        if (contract.getContractId() == contractId) {
-            return true; // Duplicate ID found
-        }
-    }
-    return false; // ID is unique
-}
-
-
-private void initializeTableListener() {
-    tableContractDashboard1.getSelectionModel().addListSelectionListener(e -> {
-        if (!e.getValueIsAdjusting()) { // Ensure the event is finalized
-            int selectedRow = tableContractDashboard1.getSelectedRow(); // Get the selected row index
-            if (selectedRow != -1) { // Ensure a row is selected
-                // Retrieve values from the selected row
-                String contractIdStr = tableContractDashboard1.getValueAt(selectedRow, 0).toString(); // Column 0
-                String contractTitle = tableContractDashboard1.getValueAt(selectedRow, 1).toString(); // Column 1
-                String contractLocation = tableContractDashboard1.getValueAt(selectedRow, 2).toString(); // Column 2
-                String startDateString = tableContractDashboard1.getValueAt(selectedRow, 3).toString(); // Column 3
-                String endDateString = tableContractDashboard1.getValueAt(selectedRow, 4).toString(); // Column 4
-                String contractStatus = tableContractDashboard1.getValueAt(selectedRow, 5).toString(); // Column 5
-                String contractValueStr = tableContractDashboard1.getValueAt(selectedRow, 6).toString().trim(); // Column 6
-                String clientName = tableContractDashboard1.getValueAt(selectedRow, 7).toString(); // Column 7
-                String scopeOfWork = tableContractDashboard1.getValueAt(selectedRow, 8).toString(); // Column 8
-
-                // Populate the text fields with the retrieved data
-                txtContractId.setText(contractIdStr);
-                txtContractTitle.setText(contractTitle);
-                txtContractLocation.setText(contractLocation);
-                txtContractStartDate.setText(startDateString);
-                txtContractExpectedEndDate.setText(endDateString);
-                txtContractStatus.setText(contractStatus);
-               txtContractValue.setText(contractValueStr);
-                txtClientName.setText(clientName);
-                txtScopeOfWork.setText(scopeOfWork);
+    private boolean isContractIdDuplicate(int contractId) {
+        // Assuming `contractList` is a List<ContractModel> storing all contracts
+        for (ContractModel contract : ContractList) {
+            if (contract.getContractId() == contractId) {
+                return true; // Duplicate ID found
             }
         }
-    });
-}
+        return false; // ID is unique
+    }
 
+    private void initializeTableListener() {
+        tableContractDashboard1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Ensure the event is finalized
+                int selectedRow = tableContractDashboard1.getSelectedRow(); // Get the selected row index
+                if (selectedRow != -1) { // Ensure a row is selected
+                    // Retrieve values from the selected row
+                    String contractIdStr = tableContractDashboard1.getValueAt(selectedRow, 0).toString(); // Column 0
+                    String contractTitle = tableContractDashboard1.getValueAt(selectedRow, 1).toString(); // Column 1
+                    String contractLocation = tableContractDashboard1.getValueAt(selectedRow, 2).toString(); // Column 2
+                    String startDateString = tableContractDashboard1.getValueAt(selectedRow, 3).toString(); // Column 3
+                    String endDateString = tableContractDashboard1.getValueAt(selectedRow, 4).toString(); // Column 4
+                    String contractStatus = tableContractDashboard1.getValueAt(selectedRow, 5).toString(); // Column 5
+                    String contractValueStr = tableContractDashboard1.getValueAt(selectedRow, 6).toString().trim(); // Column 6
+                    String clientName = tableContractDashboard1.getValueAt(selectedRow, 7).toString(); // Column 7
+                    String scopeOfWork = tableContractDashboard1.getValueAt(selectedRow, 8).toString(); // Column 8
 
-private void refreshTable() {
-    DefaultTableModel tableModel = (DefaultTableModel) tableContractDashboard1.getModel();
-    tableModel.setRowCount(0);  // Clear the current rows
-
-    // Populate the table with updated data
-    for (ContractModel contract : ContractList) {
-        tableModel.addRow(new Object[]{
-            contract.getContractId(),
-            contract.getContractTitle(),
-            contract.getContractLocation(),
-            contract.getContractStartDate(),
-            contract.getContractExpectedEndDate(),
-            contract.getContractStatus(),
-            contract.getContractValue(),
-            contract.getClientName(),
-            contract.getScopeOfWork()
+                    // Populate the text fields with the retrieved data
+                    txtContractId.setText(contractIdStr);
+                    txtContractTitle.setText(contractTitle);
+                    txtContractLocation.setText(contractLocation);
+                    txtContractStartDate.setText(startDateString);
+                    txtContractExpectedEndDate.setText(endDateString);
+                    txtContractStatus.setText(contractStatus);
+                    txtContractValue.setText(contractValueStr);
+                    txtClientName.setText(clientName);
+                    txtScopeOfWork.setText(scopeOfWork);
+                }
+            }
         });
     }
-}
 
+    private void refreshTable() {
+        DefaultTableModel tableModel = (DefaultTableModel) tableContractDashboard1.getModel();
+        tableModel.setRowCount(0);  // Clear the current rows
+
+        // Populate the table with updated data
+        for (ContractModel contract : ContractList) {
+            tableModel.addRow(new Object[]{
+                contract.getContractId(),
+                contract.getContractTitle(),
+                contract.getContractLocation(),
+                contract.getContractStartDate(),
+                contract.getContractExpectedEndDate(),
+                contract.getContractStatus(),
+                contract.getContractValue(),
+                contract.getClientName(),
+                contract.getScopeOfWork()
+            });
+        }
+    }
 
 
     private void addContractBtnContractPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addContractBtnContractPanelMouseClicked
-       try {
-        // Retrieve and trim input values
-        String contractIdStr = txtContractId.getText().trim();
-        String contractTitle = txtContractTitle.getText().trim();
-        String contractLocation = txtContractLocation.getText().trim();
-        String startDateString = txtContractStartDate.getText().trim();
-        String endDateString = txtContractExpectedEndDate.getText().trim();
-        String contractStatus = txtContractStatus.getText().trim();
-        String contractValueStr = txtContractValue.getText().trim();
-        String clientName = txtClientName.getText().trim();
-        String scopeOfWork = txtScopeOfWork.getText().trim();
-
-        // Check if any field is empty
-        if (ValidationUtil.isNullOrEmpty(contractIdStr) ||
-            ValidationUtil.isNullOrEmpty(contractTitle) ||
-            ValidationUtil.isNullOrEmpty(contractLocation) ||
-            ValidationUtil.isNullOrEmpty(startDateString) ||
-            ValidationUtil.isNullOrEmpty(endDateString) ||
-            ValidationUtil.isNullOrEmpty(contractStatus) ||
-            ValidationUtil.isNullOrEmpty(contractValueStr) ||
-            ValidationUtil.isNullOrEmpty(clientName) ||
-            ValidationUtil.isNullOrEmpty(scopeOfWork)) {
-
-            JOptionPane.showMessageDialog(null, "All fields must be filled.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-     int contractId = Integer.parseInt(contractIdStr);
-        if (!ValidationUtil.isValidId(contractId)) {
-            JOptionPane.showMessageDialog(null, "Contract ID must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (isContractIdDuplicate(contractId)) {
-            JOptionPane.showMessageDialog(null, "Contract ID must be unique. The given ID already exists.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!ValidationUtil.isValidName(clientName)) {
-            JOptionPane.showMessageDialog(null, "Client Name should only contain alphabetic characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!ValidationUtil.isValidStatus(contractStatus)) {
-            JOptionPane.showMessageDialog(null, "Contract Status must be one of: Pending, Completed, or On Hold.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!ValidationUtil.isValidValue(Double.parseDouble(contractValueStr))) {
-            JOptionPane.showMessageDialog(null, "Contract Value must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate contractStartDate;
-        LocalDate contractExpectedEndDate;
-
         try {
-            contractStartDate = LocalDate.parse(startDateString, formatter);
-            contractExpectedEndDate = LocalDate.parse(endDateString, formatter);
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Dates must be in the format yyyy-MM-dd.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            // Retrieve and trim input values
+            String contractIdStr = txtContractId.getText().trim();
+            String contractTitle = txtContractTitle.getText().trim();
+            String contractLocation = txtContractLocation.getText().trim();
+            String startDateString = txtContractStartDate.getText().trim();
+            String endDateString = txtContractExpectedEndDate.getText().trim();
+            String contractStatus = txtContractStatus.getText().trim();
+            String contractValueStr = txtContractValue.getText().trim();
+            String clientName = txtClientName.getText().trim();
+            String scopeOfWork = txtScopeOfWork.getText().trim();
+
+            // Check if any field is empty
+            if (ValidationUtil.isNullOrEmpty(contractIdStr)
+                    || ValidationUtil.isNullOrEmpty(contractTitle)
+                    || ValidationUtil.isNullOrEmpty(contractLocation)
+                    || ValidationUtil.isNullOrEmpty(startDateString)
+                    || ValidationUtil.isNullOrEmpty(endDateString)
+                    || ValidationUtil.isNullOrEmpty(contractStatus)
+                    || ValidationUtil.isNullOrEmpty(contractValueStr)
+                    || ValidationUtil.isNullOrEmpty(clientName)
+                    || ValidationUtil.isNullOrEmpty(scopeOfWork)) {
+
+                JOptionPane.showMessageDialog(null, "All fields must be filled.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int contractId = Integer.parseInt(contractIdStr);
+            if (!ValidationUtil.isValidId(contractId)) {
+                JOptionPane.showMessageDialog(null, "Contract ID must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (isContractIdDuplicate(contractId)) {
+                JOptionPane.showMessageDialog(null, "Contract ID must be unique. The given ID already exists.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!ValidationUtil.isValidName(clientName)) {
+                JOptionPane.showMessageDialog(null, "Client Name should only contain alphabetic characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!ValidationUtil.isValidStatus(contractStatus)) {
+                JOptionPane.showMessageDialog(null, "Contract Status must be one of: Pending, Completed, or On Hold.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!ValidationUtil.isValidValue(Double.parseDouble(contractValueStr))) {
+                JOptionPane.showMessageDialog(null, "Contract Value must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate contractStartDate;
+            LocalDate contractExpectedEndDate;
+
+            try {
+                contractStartDate = LocalDate.parse(startDateString, formatter);
+                contractExpectedEndDate = LocalDate.parse(endDateString, formatter);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Dates must be in the format yyyy-MM-dd.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (contractStartDate.isAfter(contractExpectedEndDate)) {
+                JOptionPane.showMessageDialog(null, "Start date cannot be after the expected end date.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // All validations passed, proceed with adding the contract
+            ContractModel model = new ContractModel(
+                    Integer.parseInt(contractIdStr),
+                    contractTitle,
+                    contractLocation,
+                    contractStartDate,
+                    contractExpectedEndDate,
+                    contractStatus,
+                    Double.parseDouble(contractValueStr),
+                    clientName,
+                    scopeOfWork
+            );
+
+            addContract(model);
+            refreshTable();
+            JOptionPane.showMessageDialog(null, "Contract successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Numeric fields must contain valid numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        if (contractStartDate.isAfter(contractExpectedEndDate)) {
-            JOptionPane.showMessageDialog(null, "Start date cannot be after the expected end date.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
-        // All validations passed, proceed with adding the contract
-        ContractModel model = new ContractModel(
-            Integer.parseInt(contractIdStr),
-            contractTitle,
-            contractLocation,
-            contractStartDate,
-            contractExpectedEndDate,
-            contractStatus,
-            Double.parseDouble(contractValueStr),
-            clientName,
-            scopeOfWork
-        );
-
-        addContract(model);
-        refreshTable();
-        JOptionPane.showMessageDialog(null, "Contract successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Numeric fields must contain valid numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
-        
-    
-            
-        
-        
     }//GEN-LAST:event_addContractBtnContractPanelMouseClicked
 
     private void txtContractTitle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContractTitle1ActionPerformed
@@ -3293,7 +3423,7 @@ private void refreshTable() {
     }//GEN-LAST:event_addContractBtn5MouseClicked
 
     private void addStockBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStockBtn1MouseClicked
-          txtFieldUsername.setText("");
+        txtFieldUsername.setText("");
         txtFieldPassword.setText("");
         loadScreenPage("LoginScreen"); // Load the main screen
     }//GEN-LAST:event_addStockBtn1MouseClicked
@@ -3307,16 +3437,15 @@ private void refreshTable() {
     }//GEN-LAST:event_addStockBtn1MouseExited
 
     private void pnlLoginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLoginBtnMouseClicked
- String username = txtFieldUsername.getText().trim();
-        String password = new String(txtFieldPassword.getPassword()).trim();  
-        
-         if (username.isEmpty() || password.isEmpty()) {
+        String username = txtFieldUsername.getText().trim();
+        String password = new String(txtFieldPassword.getPassword()).trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
             lblMessage.setText("! Please enter your username and password.");
         } // Check if username and password are incorrect
         else if (!username.equals("admin") || !password.equals("admin")) {
             lblMessage.setText("! Username and password mismatch.");
         } // If credentials are correct, proceed to load the main screen
-   
         else {
             lblMessage.setText(""); // Clear any previous error messages
             loadScreenPage("MainScreen"); // Load the main screen
@@ -3344,69 +3473,66 @@ private void refreshTable() {
     }//GEN-LAST:event_updateContractBtnContractPanelMouseClicked
 
     private void deleteContractBtnContractPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteContractBtnContractPanelMouseClicked
- 
+
     }//GEN-LAST:event_deleteContractBtnContractPanelMouseClicked
 
     private void deleteContractTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteContractTextMouseClicked
-                int selectedRowIndex = tableContractDashboard1.getSelectedRow();
-System.out.println("Delete button clicked");
-    // Check if a row is selected
-    if (selectedRowIndex == -1) {
-        JOptionPane.showMessageDialog(
-            null,
-            "Please select a row to delete.",
-            "No Selection",
-            JOptionPane.WARNING_MESSAGE
+        int selectedRowIndex = tableContractDashboard1.getSelectedRow();
+        System.out.println("Delete button clicked");
+        // Check if a row is selected
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Please select a row to delete.",
+                    "No Selection",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int confirmation = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete the selected contract?",
+                "Confirm Deletion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
         );
-        return;
-    }
 
-   
-    int confirmation = JOptionPane.showConfirmDialog(
-        null,
-        "Are you sure you want to delete the selected contract?",
-        "Confirm Deletion",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.QUESTION_MESSAGE
-    );
+        if (confirmation == JOptionPane.YES_OPTION) {
 
-    if (confirmation == JOptionPane.YES_OPTION) {
-       
-        int modelRowIndex = tableContractDashboard1.convertRowIndexToModel(selectedRowIndex); 
-        ContractModel contractToDelete = ContractList.get(modelRowIndex); 
-        ContractList.remove(contractToDelete);
+            int modelRowIndex = tableContractDashboard1.convertRowIndexToModel(selectedRowIndex);
+            ContractModel contractToDelete = ContractList.get(modelRowIndex);
+            ContractList.remove(contractToDelete);
 
-  
-        ((DefaultTableModel) tableContractDashboard1.getModel()).removeRow(selectedRowIndex);
+            ((DefaultTableModel) tableContractDashboard1.getModel()).removeRow(selectedRowIndex);
+            ((DefaultTableModel) tableContractDashboard.getModel()).removeRow(selectedRowIndex);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "The contract has been successfully deleted.",  
+                    "Deletion Successful", 
+                    JOptionPane.INFORMATION_MESSAGE   
+            );
+        } else {
 
-     
-        JOptionPane.showMessageDialog(
-            null,
-            "The contract has been successfully deleted.",
-            "Deletion Successful",
-            JOptionPane.INFORMATION_MESSAGE
-        );
-    } else {
-     
-        JOptionPane.showMessageDialog(
-            null,
-            "Deletion cancelled.",
-            "Cancelled",
-            JOptionPane.INFORMATION_MESSAGE
-        );
-    }
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Deletion cancelled.",
+                    "Cancelled",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }//GEN-LAST:event_deleteContractTextMouseClicked
 
     private void clearDataTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDataTxtMouseClicked
- txtContractId.setText("");
-    txtContractTitle.setText("");
-    txtContractLocation.setText("");
-    txtContractStartDate.setText("");
-    txtContractExpectedEndDate.setText("");
-    txtContractStatus.setText("");
-    txtContractValue.setText("");
-    txtClientName.setText("");
-    txtScopeOfWork.setText("");
+        txtContractId.setText("");
+        txtContractTitle.setText("");
+        txtContractLocation.setText("");
+        txtContractStartDate.setText("");
+        txtContractExpectedEndDate.setText("");
+        txtContractStatus.setText("");
+        txtContractValue.setText("");
+        txtClientName.setText("");
+        txtScopeOfWork.setText("");
     }//GEN-LAST:event_clearDataTxtMouseClicked
 
     private void ClearDataBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClearDataBtnMouseClicked
@@ -3414,138 +3540,331 @@ System.out.println("Delete button clicked");
     }//GEN-LAST:event_ClearDataBtnMouseClicked
 
     private void updateContractTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateContractTextMouseClicked
-      int selectedRowIndex = tableContractDashboard1.getSelectedRow();
-      
-         if (selectedRowIndex == -1) {
-        JOptionPane.showMessageDialog(
-            null,
-            "Please select a row to update.",
-            "No Selection",
-            JOptionPane.WARNING_MESSAGE
-        );
-        return;
-    }
+        int selectedRowIndex = tableContractDashboard1.getSelectedRow();
+
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Please select a row to update.",
+                    "No Selection",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this contract?", "Update Confirmation", JOptionPane.YES_NO_OPTION);
 
-         if(confirm == JOptionPane.YES_OPTION){
-                  try {
-       
-        String contractIdStr = txtContractId.getText().trim();
-        String contractTitle = txtContractTitle.getText().trim();
-        String contractLocation = txtContractLocation.getText().trim();
-        String startDateString = txtContractStartDate.getText().trim();
-        String endDateString = txtContractExpectedEndDate.getText().trim();
-        String contractStatus = txtContractStatus.getText().trim();
-        String contractValueStr = txtContractValue.getText().trim();
-       
-        String clientName = txtClientName.getText();
-        String scopeOfWork = txtScopeOfWork.getText().trim();
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
 
-        // Check if any field is empty
-        if (ValidationUtil.isNullOrEmpty(contractIdStr) ||
-            ValidationUtil.isNullOrEmpty(contractTitle) ||
-            ValidationUtil.isNullOrEmpty(contractLocation) ||
-            ValidationUtil.isNullOrEmpty(startDateString) ||
-            ValidationUtil.isNullOrEmpty(endDateString) ||
-            ValidationUtil.isNullOrEmpty(contractStatus) ||
-            ValidationUtil.isNullOrEmpty(contractValueStr) ||
-            ValidationUtil.isNullOrEmpty(clientName) ||
-            ValidationUtil.isNullOrEmpty(scopeOfWork)) {
+                String contractIdStr = txtContractId.getText().trim();
+                String contractTitle = txtContractTitle.getText().trim();
+                String contractLocation = txtContractLocation.getText().trim();
+                String startDateString = txtContractStartDate.getText().trim();
+                String endDateString = txtContractExpectedEndDate.getText().trim();
+                String contractStatus = txtContractStatus.getText().trim();
+                String contractValueStr = txtContractValue.getText().trim();
 
-            JOptionPane.showMessageDialog(null, "All fields must be filled.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+                String clientName = txtClientName.getText();
+                String scopeOfWork = txtScopeOfWork.getText().trim();
 
-     int contractId = Integer.parseInt(contractIdStr);
-        if (!ValidationUtil.isValidId(contractId)) {
-            JOptionPane.showMessageDialog(null, "Contract ID must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+                // Check if any field is empty
+                if (ValidationUtil.isNullOrEmpty(contractIdStr)
+                        || ValidationUtil.isNullOrEmpty(contractTitle)
+                        || ValidationUtil.isNullOrEmpty(contractLocation)
+                        || ValidationUtil.isNullOrEmpty(startDateString)
+                        || ValidationUtil.isNullOrEmpty(endDateString)
+                        || ValidationUtil.isNullOrEmpty(contractStatus)
+                        || ValidationUtil.isNullOrEmpty(contractValueStr)
+                        || ValidationUtil.isNullOrEmpty(clientName)
+                        || ValidationUtil.isNullOrEmpty(scopeOfWork)) {
 
-     
+                    JOptionPane.showMessageDialog(null, "All fields must be filled.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-        if (!ValidationUtil.isValidName(clientName)) {
-            JOptionPane.showMessageDialog(null, "Client Name should only contain alphabetic characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+                int contractId = Integer.parseInt(contractIdStr);
+                if (!ValidationUtil.isValidId(contractId)) {
+                    JOptionPane.showMessageDialog(null, "Contract ID must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-        if (!ValidationUtil.isValidStatus(contractStatus)) {
-            JOptionPane.showMessageDialog(null, "Contract Status must be one of: Pending, Completed, or On Hold.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
+                if (!ValidationUtil.isValidName(clientName)) {
+                    JOptionPane.showMessageDialog(null, "Client Name should only contain alphabetic characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-        if (!ValidationUtil.isValidValue(Double.parseDouble(contractValueStr))) {
-            JOptionPane.showMessageDialog(null, "Contract Value must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-      
+                if (!ValidationUtil.isValidStatus(contractStatus)) {
+                    JOptionPane.showMessageDialog(null, "Contract Status must be one of: Pending, Completed, or On Hold.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate contractStartDate;
-        LocalDate contractExpectedEndDate;
+                if (!ValidationUtil.isValidValue(Double.parseDouble(contractValueStr))) {
+                    JOptionPane.showMessageDialog(null, "Contract Value must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-        try {
-            contractStartDate = LocalDate.parse(startDateString, formatter);
-            contractExpectedEndDate = LocalDate.parse(endDateString, formatter);
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Dates must be in the format yyyy-MM-dd.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate contractStartDate;
+                LocalDate contractExpectedEndDate;
 
-      
+                try {
+                    contractStartDate = LocalDate.parse(startDateString, formatter);
+                    contractExpectedEndDate = LocalDate.parse(endDateString, formatter);
+                } catch (DateTimeParseException e) {
+                    JOptionPane.showMessageDialog(null, "Dates must be in the format yyyy-MM-dd.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-     
-        ContractModel contractToUpdate = null;
-        for (ContractModel contract : ContractList) {
-            if (contract.getContractId() == contractId) {
-                contractToUpdate = contract;
-                break;
+                ContractModel contractToUpdate = null;
+                for (ContractModel contract : ContractList) {
+                    if (contract.getContractId() == contractId) {
+                        contractToUpdate = contract;
+                        break;
+                    }
+                }
+
+                if (contractToUpdate != null) {
+                    System.out.println(contractToUpdate);
+                    contractToUpdate.setContractTitle(contractTitle);
+                    contractToUpdate.setContractLocation(contractLocation);
+                    contractToUpdate.setContractStartDate(contractStartDate);
+                    contractToUpdate.setContractExpectedEndDate(contractExpectedEndDate);
+                    contractToUpdate.setContractStatus(contractStatus);
+                    contractToUpdate.setContractValue(Double.parseDouble(contractValueStr));
+                    contractToUpdate.setClientName(clientName);
+                    contractToUpdate.setScopeOfWork(scopeOfWork);
+                    System.out.println(contractToUpdate);
+                    System.out.println(ContractList);
+                    refreshTable();
+                    JOptionPane.showMessageDialog(null, "Contract successfully updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Contract with the given ID not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Numeric fields must contain valid numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
-        
-          if (contractToUpdate != null) {
-           System.out.println(contractToUpdate);
-            contractToUpdate.setContractTitle(contractTitle);
-            contractToUpdate.setContractLocation(contractLocation);
-            contractToUpdate.setContractStartDate(contractStartDate);
-            contractToUpdate.setContractExpectedEndDate(contractExpectedEndDate);
-            contractToUpdate.setContractStatus(contractStatus);
-            contractToUpdate.setContractValue(Double.parseDouble(contractValueStr));
-            contractToUpdate.setClientName(clientName);
-            contractToUpdate.setScopeOfWork(scopeOfWork);
-             System.out.println(contractToUpdate);
-              System.out.println(ContractList);
-              refreshTable();
-            JOptionPane.showMessageDialog(null, "Contract successfully updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Contract with the given ID not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Update cancelled.",
+                    "Cancelled",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         }
 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Numeric fields must contain valid numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-         }
-         else{
-    JOptionPane.showMessageDialog(
-            null,
-            "Update cancelled.",
-            "Cancelled",
+
+    }//GEN-LAST:event_updateContractTextMouseClicked
+
+    private void lblSearchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchBtnMouseClicked
+
+
+MergeSort mergeSortAlgorithm = new MergeSort();
+mergeSortAlgorithm.performMergeSort (ContractList) ;  
+
+  BinarySearch binarySearch = new BinarySearch();
+ContractModel searchedContractModel = binarySearch.searchByClient(searchBar.getText(),ContractList,0,ContractList.size() - 1);
+      if (searchedContractModel != null) {
+        JOptionPane.showMessageDialog(
+            null, 
+            "Contract Name:  "+ searchedContractModel.getContractTitle() +"\n"+
+            "Location of the Contract: " + searchedContractModel.getContractLocation() +"\n"+
+            "Contract Start Date: " + searchedContractModel.getContractStartDate()+"\n"+
+            "Contract Expected End Date: " + searchedContractModel.getContractExpectedEndDate()+"\n" + 
+            " Contract Value: " + searchedContractModel.getContractValue()+"\n" 
+            ,"Success", 
             JOptionPane.INFORMATION_MESSAGE
         );
-         }
+       
 
-         
-         
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_updateContractTextMouseClicked
+} else {
+       JOptionPane.showMessageDialog(null, "Contract with the given client name was not found!", "Error", JOptionPane.ERROR_MESSAGE);
+
+      }
+    }//GEN-LAST:event_lblSearchBtnMouseClicked
+
+    private void sortDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortDropDownActionPerformed
+//        String selectedOption = (String) sortDropDown.getSelectedItem();
+//
+//        SelectionSort selectionSort = new SelectionSort();
+//        MergeSort mergeSort = new MergeSort();
+//
+//        switch (selectedOption) {
+//
+//            case "Price:Low To High":
+//
+//                selectionSort.performLowToHighSelectionSort(ContractList);
+//                break;
+//
+//            case "Price:High To Low":
+//                System.out.println("chiryoooo");
+//                selectionSort.performHighToLowSelectionSort(ContractList);
+//                break;
+//
+//            case "Latest Data":
+//                // Implement sorting for the latest contracts if required
+//                selectionSort.performLatestDataSelectionSort(ContractList);
+//                break;
+//
+//            case "Name":
+//                mergeSort.performMergeSort(ContractList);
+//                break;
+//
+//            case "Select Item":
+//                // No action needed for default selection
+//                System.out.println("Please select a valid option.");
+//                break;
+//
+//            default:
+//                System.out.println("Invalid selection: " + selectedOption);
+//                break;
+//        }
+//
+//        // Update the table model after sorting
+//        DefaultTableModel contractTableModel = (DefaultTableModel) tableContractDashboard.getModel();
+//        contractTableModel.setRowCount(0);
+//        System.out.print(ContractList);
+//
+//        ContractList.forEach(element -> {
+//            Object[] contractData = {
+//                element.getContractId(),
+//                element.getContractTitle(),
+//                element.getContractLocation(),
+//                element.getContractStartDate(),
+//                element.getContractExpectedEndDate(),
+//                element.getContractStatus(),
+//                element.getContractValue(),
+//                element.getClientName(),
+//                element.getScopeOfWork()
+//            };
+//
+//            // Debugging output to check Contract Value
+//            System.out.println("Contract Value: " + element.getContractValue());
+//
+//            // Add data to the table model
+//            contractTableModel.addRow(contractData);
+//        });
+    }//GEN-LAST:event_sortDropDownActionPerformed
+
+    private void sortDropDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sortDropDownMouseClicked
  
+    }//GEN-LAST:event_sortDropDownMouseClicked
+
+    private void sortDropDown1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sortDropDown1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortDropDown1MouseClicked
+
+    private void sortDropDown1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortDropDown1ActionPerformed
+       String selectedOption = (String) sortDropDown1.getSelectedItem();
+
+    
+
+        SelectionSort selectionSort = new SelectionSort();
+        MergeSort mergeSort = new MergeSort();
+
+        switch (selectedOption) {
+
+            case "Price:Low To High":
+
+                selectionSort.performLowToHighSelectionSort(ContractList);
+                break;
+
+            case "Price:High To Low":
+                System.out.println("chiryoooo");
+                selectionSort.performHighToLowSelectionSort(ContractList);
+                break;
+
+            case "Latest Data":
+                // Implement sorting for the latest contracts if required
+                selectionSort.performLatestDataSelectionSort(ContractList);
+                break;
+
+            case "Name":
+                mergeSort.performMergeSort(ContractList);
+                break;
+
+            case "Select Item":
+                // No action needed for default selection
+                System.out.println("Please select a valid option.");
+                break;
+
+            default:
+                System.out.println("Invalid selection: " + selectedOption);
+                break;
+        }
+
+        // Update the table model after sorting
+        DefaultTableModel contractTableModel = (DefaultTableModel) tableContractDashboard1.getModel();
+        contractTableModel.setRowCount(0);
+        System.out.print(ContractList);
+
+        ContractList.forEach(element -> {
+            Object[] contractData = {
+                element.getContractId(),
+                element.getContractTitle(),
+                element.getContractLocation(),
+                element.getContractStartDate(),
+                element.getContractExpectedEndDate(),
+                element.getContractStatus(),
+                element.getContractValue(),
+                element.getClientName(),
+                element.getScopeOfWork()
+            };
+
+            // Debugging output to check Contract Value
+            System.out.println("Contract Value: " + element.getContractValue());
+
+            // Add data to the table model
+            contractTableModel.addRow(contractData);
+        });
+    }//GEN-LAST:event_sortDropDown1ActionPerformed
+
+    private void dropDownSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropDownSearchActionPerformed
+ String selectedOption = (String) dropDownSearch.getSelectedItem();
+
+  
+    System.out.println("Selected Option: " + selectedOption);
+
+
+    if (selectedOption == null || selectedOption.trim().isEmpty()) {
+        searchBar.setText("Select a model to search");
+        System.out.println("No option selected");
+    } else if (selectedOption.equals("Contract")) {
+        searchBar.setText("Enter Client Name");
+    } else if (selectedOption.equals("Stock")) {
+        searchBar.setText("Enter Hardware Name");
+        System.out.println("Stock selected");
+    } else if (selectedOption.equals("Order")) {
+        searchBar.setText("Enter Order Name");
+        System.out.println("Order selected");
+    } else if (selectedOption.equals("Product")) {
+        searchBar.setText("Enter Product Name");
+    } else if (selectedOption.equalsIgnoreCase("supplier")) { // Case-insensitive match
+        searchBar.setText("Enter Supplier Name");
+    } else {
+        searchBar.setText("Select a model to search");
+        System.out.println("Default case triggered");
+    }         
+    
+    }//GEN-LAST:event_dropDownSearchActionPerformed
+
+    private void searchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchBarFocusGained
+        searchBar.setText("");
+    }//GEN-LAST:event_searchBarFocusGained
+
+    private void searchBarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchBarFocusLost
+  
+ searchBar.setText ( "Select a model to search ") ;
+
+
+    }//GEN-LAST:event_searchBarFocusLost
+
+    private void dropDownSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dropDownSearchMouseClicked
+
+    }//GEN-LAST:event_dropDownSearchMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -3557,7 +3876,7 @@ System.out.println("Delete button clicked");
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -3580,7 +3899,7 @@ System.out.println("Delete button clicked");
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ClearDataBtn;
@@ -3658,6 +3977,7 @@ System.out.println("Delete button clicked");
     private javax.swing.JPanel displayPanel1;
     private javax.swing.JPanel displayPanel2;
     private javax.swing.JPanel displayPanel3;
+    private javax.swing.JComboBox<String> dropDownSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3667,6 +3987,7 @@ System.out.println("Delete button clicked");
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -3691,19 +4012,19 @@ System.out.println("Delete button clicked");
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator16;
+    private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblMessage;
+    private javax.swing.JLabel lblSearchBtn;
     private javax.swing.JPanel loginCard;
     private javax.swing.JPanel loginPage;
     private javax.swing.JLabel loginTitleTxt;
@@ -3727,6 +4048,9 @@ System.out.println("Delete button clicked");
     private javax.swing.JLabel revenueText3;
     private javax.swing.JLabel revenueText5;
     private javax.swing.JLabel revenueText6;
+    private javax.swing.JTextField searchBar;
+    private javax.swing.JComboBox<String> sortDropDown;
+    private javax.swing.JComboBox<String> sortDropDown1;
     private javax.swing.JTable tableContractDashboard;
     private javax.swing.JTable tableContractDashboard1;
     private javax.swing.JTable tableLatestStockDashboard;
@@ -3788,31 +4112,36 @@ System.out.println("Delete button clicked");
     private javax.swing.JPanel updateContractBtnContractPanel;
     private javax.swing.JLabel updateContractText;
     // End of variables declaration//GEN-END:variables
+}
 
+ class RoundedPanel extends JPanel {
 
-class RoundedPanel extends JPanel
-    {
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -3827,61 +4156,13 @@ class RoundedPanel extends JPanel
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             
         }
     }
-class RoundedTextField extends JTextField {
-    private int cornerRadius = 15;
-    private Color backgroundColor;
 
-    public RoundedTextField(int columns, int radius) {
-        super(columns);
-        this.cornerRadius = radius;
-        setOpaque(false); // To enable custom background drawing
-    }
 
-    public RoundedTextField(int columns, int radius, Color bgColor) {
-        super(columns);
-        this.cornerRadius = radius;
-        this.backgroundColor = bgColor;
-        setOpaque(false);
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D graphics = (Graphics2D) g.create();
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Fill the rounded background
-        if (backgroundColor != null) {
-            graphics.setColor(backgroundColor);
-        } else {
-            graphics.setColor(getBackground());
-        }
-        
-        // Adjust padding to prevent overlap
-        graphics.fillRoundRect(1, 1, getWidth() - 2, getHeight() - 2, cornerRadius, cornerRadius);
-
-        // Draw border
-        graphics.setColor(getForeground());
-        graphics.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, cornerRadius, cornerRadius);
-
-        graphics.dispose();
-        super.paintComponent(g);
-    }
-
-    @Override
-    protected void paintBorder(Graphics g) {
-        // Custom border already painted
-    }
-
-    @Override
-    public void setBorder(Border border) {
-        // Disable default border setting
-    }
-}
-}
+  
 
