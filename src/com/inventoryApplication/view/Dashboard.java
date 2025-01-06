@@ -1,6 +1,7 @@
 package com.inventoryApplication.view;
 
 import com.inventoryApplication.controller.algorithms.BinarySearch;
+import com.inventoryApplication.controller.algorithms.InsertionSort;
 import com.inventoryApplication.controller.algorithms.MergeSort;
 import com.inventoryApplication.controller.algorithms.SelectionSort;
 import com.inventoryApplication.model.ContractModel;
@@ -712,28 +713,26 @@ public class Dashboard extends javax.swing.JFrame {
         );
         NavBarLayout.setVerticalGroup(
             NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createSequentialGroup()
-                .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(NavBarLayout.createSequentialGroup()
-                            .addContainerGap(31, Short.MAX_VALUE)
-                            .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(addStockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addContractBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(addProductBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addStockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblSearchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dropDownSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
-                .addGap(34, 34, 34))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createSequentialGroup()
+            .addGroup(NavBarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(NavBarLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(MainLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createSequentialGroup()
+                        .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addStockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addContractBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addProductBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addStockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblSearchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dropDownSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavBarLayout.createSequentialGroup()
+                        .addGroup(NavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(NavBarLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(MainLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28))))
         );
 
         pnlMain.add(NavBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 110));
@@ -1260,7 +1259,7 @@ public class Dashboard extends javax.swing.JFrame {
         tableStockList.setGridColor(new java.awt.Color(215, 215, 215));
         tableStockList.setRowHeight(25);
         tableStockList.setRowMargin(5);
-        tableStockList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableStockList.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableStockList.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableStockList.setShowGrid(false);
         tableStockList.setShowHorizontalLines(true);
@@ -1330,6 +1329,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
 
+        txtContractTitle3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractTitle3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Title:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractTitle3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1337,6 +1337,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractId3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractId3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Id:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractId3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1344,6 +1345,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractLocation3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractLocation3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Location:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractLocation3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1351,6 +1353,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractExpectedEndDate3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractExpectedEndDate3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Expected End Date:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractExpectedEndDate3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1358,6 +1361,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractStatus3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractStatus3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Status:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractStatus3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1365,6 +1369,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractValue3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractValue3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Value:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractValue3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1372,6 +1377,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtClientName3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtClientName3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Client Name:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtClientName3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1380,6 +1386,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtScopeOfWork3.setColumns(20);
+        txtScopeOfWork3.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtScopeOfWork3.setRows(5);
         txtScopeOfWork3.setBorder(null);
         jScrollPane8.setViewportView(txtScopeOfWork3);
@@ -1518,7 +1525,7 @@ public class Dashboard extends javax.swing.JFrame {
         tableProductList.setGridColor(new java.awt.Color(215, 215, 215));
         tableProductList.setRowHeight(25);
         tableProductList.setRowMargin(5);
-        tableProductList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableProductList.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableProductList.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableProductList.setShowHorizontalLines(true);
         jScrollPane9.setViewportView(tableProductList);
@@ -1769,7 +1776,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tableOrdersList.setGridColor(new java.awt.Color(215, 215, 215));
-        tableOrdersList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableOrdersList.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableOrdersList.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableOrdersList.setShowHorizontalLines(true);
         jScrollPane7.setViewportView(tableOrdersList);
@@ -2021,7 +2028,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tableSupplierList.setGridColor(new java.awt.Color(215, 215, 215));
-        tableSupplierList.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableSupplierList.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableSupplierList.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableSupplierList.setShowHorizontalLines(true);
         jScrollPane5.setViewportView(tableSupplierList);
@@ -2086,6 +2093,7 @@ public class Dashboard extends javax.swing.JFrame {
         addContractText.setForeground(new java.awt.Color(194, 72, 34));
         addContractText.setText("Manage Contracts:");
 
+        txtContractTitle.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractTitle.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Title:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2093,6 +2101,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractId.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractId.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Id:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2100,6 +2109,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractLocation.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractLocation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Location:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2107,6 +2117,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractExpectedEndDate.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractExpectedEndDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Expected End Date:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractExpectedEndDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2114,6 +2125,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractStatus.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractStatus.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Status:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2121,6 +2133,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtContractValue.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractValue.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Value:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2128,6 +2141,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtClientName.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtClientName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Client Name:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtClientName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2136,7 +2150,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtScopeOfWork.setColumns(20);
-        txtScopeOfWork.setFont(new java.awt.Font("Poppins Light", 0, 12)); // NOI18N
+        txtScopeOfWork.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtScopeOfWork.setRows(5);
         txtScopeOfWork.setBorder(null);
         jScrollPane1.setViewportView(txtScopeOfWork);
@@ -2169,6 +2183,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         jLabel7.setText("Scope Of Work:");
 
+        txtContractStartDate.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         txtContractStartDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contract Start Date:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Poppins Medium", 0, 14))); // NOI18N
         txtContractStartDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2390,7 +2405,7 @@ public class Dashboard extends javax.swing.JFrame {
         tableContractDashboard1.setGridColor(new java.awt.Color(214, 214, 214));
         tableContractDashboard1.setRowHeight(25);
         tableContractDashboard1.setRowMargin(5);
-        tableContractDashboard1.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableContractDashboard1.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableContractDashboard1.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableContractDashboard1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableContractDashboard1.setShowGrid(false);
@@ -2415,7 +2430,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         PendingContractsDisplay2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1190, 180));
 
-        sortDropDown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item", "Latest Data", "Price:High To Low", "Price:Low To High", "Name" }));
+        sortDropDown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item", "Latest Data", "Price:High To Low", "Price:Low To High", "Client Name","Pending","On Hold","Completed" }));
         sortDropDown1.setBorder(null);
         sortDropDown1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sortDropDown1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2674,7 +2689,7 @@ public class Dashboard extends javax.swing.JFrame {
         tableContractDashboard.setGridColor(new java.awt.Color(214, 214, 214));
         tableContractDashboard.setRowHeight(25);
         tableContractDashboard.setRowMargin(5);
-        tableContractDashboard.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableContractDashboard.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableContractDashboard.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableContractDashboard.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableContractDashboard.setShowGrid(false);
@@ -2701,7 +2716,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         PendingContractsDisplay1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1160, 200));
 
-        sortDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item", "Latest Data", "Price:High To Low", "Price:Low To High", "Name" }));
+        sortDropDown.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
+        sortDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Item", "Latest Data", "Price:High To Low", "Price:Low To High", "Client Name","Completed","On Hold","Pending" }));
         sortDropDown.setBorder(null);
         sortDropDown.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sortDropDown.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2757,7 +2773,7 @@ public class Dashboard extends javax.swing.JFrame {
         tableNewOrdersDashboard.setGridColor(new java.awt.Color(214, 214, 214));
         tableNewOrdersDashboard.setRowHeight(25);
         tableNewOrdersDashboard.setRowMargin(5);
-        tableNewOrdersDashboard.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableNewOrdersDashboard.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableNewOrdersDashboard.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableNewOrdersDashboard.setShowGrid(false);
         tableNewOrdersDashboard.setShowHorizontalLines(true);
@@ -2820,7 +2836,7 @@ public class Dashboard extends javax.swing.JFrame {
         tableLatestStockDashboard.setGridColor(new java.awt.Color(214, 214, 214));
         tableLatestStockDashboard.setRowHeight(25);
         tableLatestStockDashboard.setRowMargin(5);
-        tableLatestStockDashboard.setSelectionBackground(new java.awt.Color(37, 38, 58));
+        tableLatestStockDashboard.setSelectionBackground(new java.awt.Color(194, 72, 34));
         tableLatestStockDashboard.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableLatestStockDashboard.setShowGrid(false);
         tableLatestStockDashboard.setShowHorizontalLines(true);
@@ -3686,83 +3702,11 @@ ContractModel searchedContractModel = binarySearch.searchByClient(searchBar.getT
     }//GEN-LAST:event_lblSearchBtnMouseClicked
 
     private void sortDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortDropDownActionPerformed
-//        String selectedOption = (String) sortDropDown.getSelectedItem();
-//
-//        SelectionSort selectionSort = new SelectionSort();
-//        MergeSort mergeSort = new MergeSort();
-//
-//        switch (selectedOption) {
-//
-//            case "Price:Low To High":
-//
-//                selectionSort.performLowToHighSelectionSort(ContractList);
-//                break;
-//
-//            case "Price:High To Low":
-//                System.out.println("chiryoooo");
-//                selectionSort.performHighToLowSelectionSort(ContractList);
-//                break;
-//
-//            case "Latest Data":
-//                // Implement sorting for the latest contracts if required
-//                selectionSort.performLatestDataSelectionSort(ContractList);
-//                break;
-//
-//            case "Name":
-//                mergeSort.performMergeSort(ContractList);
-//                break;
-//
-//            case "Select Item":
-//                // No action needed for default selection
-//                System.out.println("Please select a valid option.");
-//                break;
-//
-//            default:
-//                System.out.println("Invalid selection: " + selectedOption);
-//                break;
-//        }
-//
-//        // Update the table model after sorting
-//        DefaultTableModel contractTableModel = (DefaultTableModel) tableContractDashboard.getModel();
-//        contractTableModel.setRowCount(0);
-//        System.out.print(ContractList);
-//
-//        ContractList.forEach(element -> {
-//            Object[] contractData = {
-//                element.getContractId(),
-//                element.getContractTitle(),
-//                element.getContractLocation(),
-//                element.getContractStartDate(),
-//                element.getContractExpectedEndDate(),
-//                element.getContractStatus(),
-//                element.getContractValue(),
-//                element.getClientName(),
-//                element.getScopeOfWork()
-//            };
-//
-//            // Debugging output to check Contract Value
-//            System.out.println("Contract Value: " + element.getContractValue());
-//
-//            // Add data to the table model
-//            contractTableModel.addRow(contractData);
-//        });
-    }//GEN-LAST:event_sortDropDownActionPerformed
-
-    private void sortDropDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sortDropDownMouseClicked
- 
-    }//GEN-LAST:event_sortDropDownMouseClicked
-
-    private void sortDropDown1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sortDropDown1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sortDropDown1MouseClicked
-
-    private void sortDropDown1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortDropDown1ActionPerformed
-       String selectedOption = (String) sortDropDown1.getSelectedItem();
-
-    
+        String selectedOption = (String) sortDropDown.getSelectedItem();
 
         SelectionSort selectionSort = new SelectionSort();
         MergeSort mergeSort = new MergeSort();
+        InsertionSort insertionSort=new InsertionSort();
 
         switch (selectedOption) {
 
@@ -3781,7 +3725,93 @@ ContractModel searchedContractModel = binarySearch.searchByClient(searchBar.getT
                 selectionSort.performLatestDataSelectionSort(ContractList);
                 break;
 
-            case "Name":
+            case "Client Name":
+                mergeSort.performMergeSort(ContractList);
+                break;
+                
+            case "Completed":
+                insertionSort.sortByCompleted(ContractList);
+                break;
+                
+            case "On Hold":
+                insertionSort.sortByOnHold(ContractList);
+                break;
+                
+            case "Pending":
+                insertionSort.sortByPending(ContractList);
+                break;
+
+            case "Select Item":
+                // No action needed for default selection
+                System.out.println("Please select a valid option.");
+                break;
+
+            default:
+                System.out.println("Invalid selection: " + selectedOption);
+                break;
+        }
+
+        // Update the table model after sorting
+        DefaultTableModel contractTableModel = (DefaultTableModel) tableContractDashboard.getModel();
+        contractTableModel.setRowCount(0);
+        System.out.print(ContractList);
+
+        ContractList.forEach(element -> {
+            Object[] contractData = {
+                element.getContractId(),
+                element.getContractTitle(),
+                element.getContractLocation(),
+                element.getContractStartDate(),
+                element.getContractExpectedEndDate(),
+                element.getContractStatus(),
+                element.getContractValue(),
+                element.getClientName(),
+                element.getScopeOfWork()
+            };
+
+            // Debugging output to check Contract Value
+            System.out.println("Contract Value: " + element.getContractValue());
+
+            // Add data to the table model
+            contractTableModel.addRow(contractData);
+        });
+    }//GEN-LAST:event_sortDropDownActionPerformed
+
+    private void sortDropDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sortDropDownMouseClicked
+ 
+    }//GEN-LAST:event_sortDropDownMouseClicked
+
+    private void sortDropDown1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sortDropDown1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortDropDown1MouseClicked
+
+    private void sortDropDown1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortDropDown1ActionPerformed
+       String selectedOption = (String) sortDropDown1.getSelectedItem();
+
+    
+
+        SelectionSort selectionSort = new SelectionSort();
+        MergeSort mergeSort = new MergeSort();
+        InsertionSort insertionSort=new InsertionSort();
+        
+        switch (selectedOption) {
+
+            case "Price:Low To High":
+
+                selectionSort.performLowToHighSelectionSort(ContractList);
+                break;
+
+            case "Price:High To Low":
+                System.out.println("chiryoooo");
+                selectionSort.performHighToLowSelectionSort(ContractList);
+                break;
+
+            case "Latest Data":
+                // Implement sorting for the latest contracts if required
+                selectionSort.performLatestDataSelectionSort(ContractList);
+                break;
+
+            case "Client Name":
                 mergeSort.performMergeSort(ContractList);
                 break;
 
@@ -3789,6 +3819,19 @@ ContractModel searchedContractModel = binarySearch.searchByClient(searchBar.getT
                 // No action needed for default selection
                 System.out.println("Please select a valid option.");
                 break;
+                
+            case "Completed":
+                insertionSort.sortByCompleted(ContractList);
+                break;
+                
+            case "On Hold":
+                insertionSort.sortByOnHold(ContractList);
+                break;
+                
+            case "Pending":
+                insertionSort.sortByPending(ContractList);
+                break;
+            
 
             default:
                 System.out.println("Invalid selection: " + selectedOption);
@@ -3852,6 +3895,7 @@ ContractModel searchedContractModel = binarySearch.searchByClient(searchBar.getT
 
     private void searchBarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchBarFocusGained
         searchBar.setText("");
+
     }//GEN-LAST:event_searchBarFocusGained
 
     private void searchBarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchBarFocusLost
